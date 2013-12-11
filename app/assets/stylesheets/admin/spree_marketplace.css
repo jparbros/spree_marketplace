@@ -1,3 +1,5 @@
 /*
  *= require admin/spree_backend
 */
+
+a.icon_link span { display:block; }

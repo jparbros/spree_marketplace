@@ -2,8 +2,10 @@ Spree::Supplier.class_eval do
 
   has_many   :bank_accounts, class_name: 'Spree::SupplierBankAccount'
 
-  before_create :balanced_customer_setup
-  before_save :balanced_customer_update
+  before_create :balanced_customer_setup, if: Proc.new {SpreeMarketplace::Config.payment_gateway == 'balanced'}
+  before_save :balanced_customer_update, if: Proc.new {SpreeMarketplace::Config.payment_gateway == 'balanced'}
+  
+  preference :stripe_access_token, :string
 
   private
 
